@@ -1,0 +1,7 @@
+.container {
+    margin: 64px;
+    display: flex;
+    flex-wrap: wrap;
+    width: 320px;
+    height: 320px;
+};
