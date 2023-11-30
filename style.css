@@ -1,7 +1,9 @@
 .container {
+    box-sizing: border-box;
     margin: 64px;
-    display: flex;
-    flex-wrap: wrap;
-    width: 320px;
-    height: 320px;
+    display: grid;
+    width: 80vh;
+    height: 80vh;
+    gap: 0px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
 };
