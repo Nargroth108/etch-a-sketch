@@ -1,11 +1,40 @@
-let container = document.querySelector('.container');
+const GRIDSIDE = 600;
 
-let numOf = prompt('choose a number');
+const button = document.querySelector("#button");
 
-for (i = 0; i < numOf*numOf; i++){
-    const div = document.createElement('div');
-    div.classList.add('square');
-    div.style.cssText = 'aspect-ratio: 1; background-color: black;'
-    container.appendChild(div);
-};
+let squaresPerSide = 16;
 
+
+const sketchArea = document.querySelector("#sketch-area");
+sketchArea.style.width = sketchArea.style.height = `${GRIDSIDE}px`;
+
+
+function setBackgroundColor() {
+    this.style.backgroundColor = "black";
+}
+
+function createGridCells(squaresPerSide) {
+    const numOfSquares = (squaresPerSide * squaresPerSide);
+    const widthOrHeight = `${GRIDSIDE / squaresPerSide}px`;
+
+    for (i = 0; i < numOfSquares; i++) {
+        const gridCell = document.createElement("div");
+
+        gridCell.style.width = gridCell.style.height = widthOrHeight;
+        gridCell.classList.add("cell");
+
+        sketchArea.appendChild(gridCell);
+
+        gridCell.addEventListener("mouseover", setBackgroundColor);
+    }
+}
+
+createGridCells(16);
+
+button.addEventListener("click", () => {
+    let userNum = prompt('Choose the number of squares in a side!');
+    while (sketchArea.firstChild) {
+        sketchArea.removeChild(sketchArea.firstChild);
+    };
+    createGridCells(userNum);
+});
