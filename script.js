@@ -10,12 +10,13 @@ sketchArea.style.width = sketchArea.style.height = `${GRIDSIDE}px`;
 
 
 function setBackgroundColor() {
-    this.style.backgroundColor = "black";
+    const randomColor = Math.floor(Math.random()*16777215).toString(16);
+    this.style.backgroundColor = "#" + randomColor;
 }
 
 function createGridCells(squaresPerSide) {
     const numOfSquares = (squaresPerSide * squaresPerSide);
-    const widthOrHeight = `${GRIDSIDE / squaresPerSide}px`;
+    const widthOrHeight = `${(GRIDSIDE / squaresPerSide) - 2}px`;
 
     for (i = 0; i < numOfSquares; i++) {
         const gridCell = document.createElement("div");
@@ -32,9 +33,9 @@ function createGridCells(squaresPerSide) {
 createGridCells(16);
 
 button.addEventListener("click", () => {
-    let userNum = prompt('Choose the number of squares in a side!');
+    let squaresPerSide = prompt('Choose the number of squares in a side!');
     while (sketchArea.firstChild) {
         sketchArea.removeChild(sketchArea.firstChild);
     };
-    createGridCells(userNum);
+    createGridCells(squaresPerSide);
 });
