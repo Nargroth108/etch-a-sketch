@@ -1,9 +1,8 @@
 const GRIDSIDE = 600;
-
-const button = document.querySelector("#button");
-
 let squaresPerSide = 16;
 
+const buttonValue = document.querySelector('#button-value');
+buttonValue.textContent = `The current sketch area is ${squaresPerSide}x${squaresPerSide} squares.`;
 
 const sketchArea = document.querySelector("#sketch-area");
 sketchArea.style.width = sketchArea.style.height = `${GRIDSIDE}px`;
@@ -16,7 +15,7 @@ function setBackgroundColor() {
 
 function createGridCells(squaresPerSide) {
     const numOfSquares = (squaresPerSide * squaresPerSide);
-    const widthOrHeight = `${(GRIDSIDE / squaresPerSide) - 2}px`;
+    const widthOrHeight = `${(GRIDSIDE / squaresPerSide)}px`;
 
     for (i = 0; i < numOfSquares; i++) {
         const gridCell = document.createElement("div");
@@ -30,12 +29,20 @@ function createGridCells(squaresPerSide) {
     }
 }
 
-createGridCells(16);
+createGridCells(squaresPerSide);
+
+const button = document.querySelector("#button");
 
 button.addEventListener("click", () => {
     let squaresPerSide = prompt('Choose the number of squares in a side!');
+    if (squaresPerSide <= 1 || squaresPerSide > 100) {
+        alert('The number must be between 1 and 100, to prevent crashes!');
+    } else {
     while (sketchArea.firstChild) {
         sketchArea.removeChild(sketchArea.firstChild);
     };
     createGridCells(squaresPerSide);
+    
+    buttonValue.textContent = `The current sketch area is ${squaresPerSide}x${squaresPerSide} squares.`;
+    }
 });
